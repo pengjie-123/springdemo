@@ -3,3 +3,4 @@ also I add some tests class like thread, aop, annotation and so on..
 keep learning, keep happy!
 hello world!!
 VERSION 002
+test merge
