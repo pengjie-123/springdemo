@@ -1,8 +1,14 @@
 package com.mt.bean;
 
+import com.mt.annotaion.Pick;
+
 public class User {
+    @Pick(level = "vip1", note = "level higher, get more bonus")
     private Integer id;
     private String  name;
+
+    public User() {
+    }
 
     public User(
         Integer id,
@@ -33,5 +39,9 @@ public class User {
             "id=" + id +
             ", name='" + name + '\'' +
             '}';
+    }
+
+    public  User getInstance(int id) {
+        return new User(id,"kevin");
     }
 }
