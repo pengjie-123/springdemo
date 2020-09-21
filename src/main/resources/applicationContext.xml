@@ -35,4 +35,11 @@
     <!-- Interceptor configuration -->
     <aop:aspectj-autoproxy/>
     <context:component-scan base-package="com.mt" />
+
+
+<!--  wa can use name which is same as id to mark this bean as a unique identifier -->
+    <bean name="bean1" class="com.mt.component.TestSpringBean">
+        <property name="provider" value="20"/>
+        <property name="customer" value="peng"/>
+    </bean>
 </beans>
