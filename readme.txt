@@ -16,3 +16,5 @@ git use tips
 
 2020/9/21 add spring bean test, use @Component and <bean/> label to let spring Ioc create bean,we can use this way to
 create two(or more) beans with different property.
+
+2020/9/22 add lock test (synchronized and lock) to implement thread safe
