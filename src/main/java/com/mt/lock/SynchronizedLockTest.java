@@ -11,7 +11,7 @@ public class SynchronizedLockTest {
 }
 
 class MyRunnable implements Runnable {
-     static int a = 100;
+    static int a = 100;
 
     @Override public void run() {
         try {
