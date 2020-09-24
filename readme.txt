@@ -22,4 +22,6 @@ create two(or more) beans with different property.
 test git push command
 
 TEST GIT PUSH
+update here somebody
+
 another one update here
