@@ -18,3 +18,7 @@ git use tips
 create two(or more) beans with different property.
 
 2020/9/22 add lock test (synchronized and lock) to implement thread safe
+
+test git reset
+
+test git push command
