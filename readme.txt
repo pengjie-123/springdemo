@@ -19,11 +19,4 @@ create two(or more) beans with different property.
 
 2020/9/22 add lock test (synchronized and lock) to implement thread safe
 2020/10/16 test spring collection and map autowired
-test git push command
-
-TEST GIT PUSH
-update here somebody
-
-another one update here
-this is update from github
-this is update from local
+2020/10/17 add JDK dynamic proxy demo
