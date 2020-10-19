@@ -21,3 +21,4 @@ create two(or more) beans with different property.
 2020/10/16 test spring collection and map autowired
 2020/10/17 add JDK dynamic proxy demo
 2020/10/19 add template method dessign pattern demo
+2020/10/19 add oberver dessign pattern demo(implement by annotation and spring common)

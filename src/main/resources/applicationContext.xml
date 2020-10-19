@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:task="http://www.springframework.org/schema/task"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/aop
@@ -37,9 +40,13 @@
     <context:component-scan base-package="com.mt" />
 
 
-<!--  wa can use name which is same as id to mark this bean as a unique identifier -->
+<!--  we can use name which is same as id to mark this bean as a unique identifier -->
     <bean name="bean1" class="com.mt.component.TestSpringBean">
         <property name="provider" value="20"/>
         <property name="customer" value="peng"/>
     </bean>
+
+<!--  this is spring configure thread pool to enable async method -->
+    <task:executor id="myexecutor" pool-size="5"  />
+    <task:annotation-driven executor="myexecutor"/>
 </beans>
