@@ -23,8 +23,4 @@ create two(or more) beans with different property.
 2020/10/19 add template method dessign pattern demo
 2020/10/19 add oberver dessign pattern demo(implement by annotation and spring common)
 
-i add some thing here on master branch.
-
-i add some thing on branch PENG-008
-
-hello master change22
+2021/02/25 add ActiveMQ test

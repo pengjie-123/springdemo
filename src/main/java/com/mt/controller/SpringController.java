@@ -1,6 +1,8 @@
 package com.mt.controller;
 
 import com.mt.component.TestSpringBean;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -21,4 +23,14 @@ public class SpringController {
         TestSpringBean test2 = (TestSpringBean) context.getBean("bean1");
         test2.go();
     }
+
+    @RequestMapping("request")
+    String request(HttpServletRequest request) {
+        String                queryString  = request.getQueryString();
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        System.out.println(parameterMap);
+        System.out.println(queryString);
+        return "ok";
+    }
+
 }
