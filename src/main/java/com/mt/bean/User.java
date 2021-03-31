@@ -10,11 +10,12 @@ public class User {
     public User() {
     }
 
-    public User(
-        Integer id,
-        String name
-    ) {
+    public User(Integer id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    private User(String name) {
         this.name = name;
     }
 
@@ -44,4 +45,6 @@ public class User {
     public  User getInstance(int id) {
         return new User(id,"kevin");
     }
+
+    private void init() {}
 }

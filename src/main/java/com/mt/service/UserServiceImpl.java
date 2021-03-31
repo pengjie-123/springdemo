@@ -1,4 +1,4 @@
-package com.mt.observer.anno;
+package com.mt.service;
 
 import com.mt.bean.User;
 

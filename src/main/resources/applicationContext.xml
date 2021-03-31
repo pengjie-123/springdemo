@@ -37,7 +37,8 @@
 
     <!-- Interceptor configuration -->
     <aop:aspectj-autoproxy/>
-    <context:component-scan base-package="com.mt" />
+    <context:component-scan base-package="com.mt.service" />
+    <context:component-scan base-package="com.mt.component" />
 
 
 <!--  we can use name which is same as id to mark this bean as a unique identifier -->
