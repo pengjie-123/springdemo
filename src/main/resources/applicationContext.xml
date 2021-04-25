@@ -50,4 +50,8 @@
 <!--  this is spring configure thread pool to enable async method -->
     <task:executor id="myexecutor" pool-size="5"  />
     <task:annotation-driven executor="myexecutor"/>
+
+    <bean name="demo2" class="com.mt.spring.XmlBeanDemo">
+        <property name="id" value="200"/>
+    </bean>
 </beans>

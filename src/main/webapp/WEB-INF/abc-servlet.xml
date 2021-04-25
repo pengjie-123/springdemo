@@ -21,7 +21,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
     <context:component-scan base-package="com.mt.controller" />
-    <bean name="demo2" class="com.mt.spring.CreateBeanDemo">
+    <bean name="demo2" class="com.mt.spring.XmlBeanDemo">
         <property name="id" value="100"/>
     </bean>
 </beans>

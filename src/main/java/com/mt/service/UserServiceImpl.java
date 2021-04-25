@@ -2,15 +2,12 @@ package com.mt.service;
 
 import com.mt.bean.User;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserServiceImpl implements UserService{
-    Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private ApplicationContext context;

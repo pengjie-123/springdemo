@@ -27,9 +27,9 @@ public class TestController {
     @GetMapping("get")
     public String get(Integer id) {
         //testService.find();
-        //System.out.println(context.getBean(TestService.class));
-        User user = testService.find(id);
-        //System.out.println(user);
+        System.out.println(context.getBean("test"));
+//        User user = testService.find(id);
+        System.out.println(testService);
         return "ok";
     }
 

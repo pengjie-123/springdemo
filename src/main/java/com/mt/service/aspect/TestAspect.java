@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class TestAspect {
 
-    @Around("execution(* com.mt.service.TestServiceImpl.find2(..))")
+    @Around("execution(* com.mt.service.TestServiceImpl.find(..))")
     public Object call(ProceedingJoinPoint point) throws Throwable {
         System.out.println("this is point cut  before method run");
-        point.proceed();
+        Object o = point.proceed();
         System.out.println("this is point cut after method run");
-        return null;
+        return o;
     }
 }
