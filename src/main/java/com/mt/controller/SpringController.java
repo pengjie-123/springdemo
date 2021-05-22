@@ -1,5 +1,6 @@
 package com.mt.controller;
 
+import com.mt.bean.User;
 import com.mt.component.TestSpringBean;
 import com.mt.service.TestService;
 import com.mt.spring.XmlBeanDemo;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -37,11 +39,12 @@ public class SpringController {
     }
 
     @RequestMapping("request")
-    String request(HttpServletRequest request) {
+    String request(HttpServletRequest request, User user) {
         String                queryString  = request.getQueryString();
         Map<String, String[]> parameterMap = request.getParameterMap();
         System.out.println(parameterMap);
         System.out.println(queryString);
+        System.out.println(user);
         return "ok";
     }
 

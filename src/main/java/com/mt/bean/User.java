@@ -1,8 +1,11 @@
 package com.mt.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mt.annotaion.Pick;
+import java.io.Serializable;
+import org.springframework.web.bind.annotation.RequestParam;
 
-public class User {
+public class User implements Serializable {
     @Pick(level = "vip1", note = "level higher, get more bonus")
     private Integer id;
     private String  name;
