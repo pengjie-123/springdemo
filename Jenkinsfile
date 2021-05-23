@@ -1,13 +1,26 @@
 pipeline {
     agent any
 
+    tools {
+              maven 'maven'
+        }
+        parameters {
+           string(name: 'VERSION', defaultValue: '2.24-SNAPSHOT', description: 'Which version to build?')
+        }
+
     stages {
-        stage('pull code') {
+        stage('echo version') {
             steps {
                 echo 'Hello World'
                 echo 'empty stage'
                 echo 'hello jie'
+                echo 's{VERSION}'
             }
         }
+        stage('Build') {
+                    steps {
+                        sh 'mvn clean install'
+                    }
+                }
     }
 }
