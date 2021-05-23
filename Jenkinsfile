@@ -11,11 +11,11 @@ pipeline {
     stages {
         stage('echo version') {
             steps {
+                sh 'mvn -version'
                 echo 'Hello World'
                 echo 'empty stage'
                 echo 'hello jie'
-                echo 's{VERSION}'
-            }
+                echo "${VERSION}"            }
         }
         stage('Build') {
                     steps {
