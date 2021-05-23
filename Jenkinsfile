@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-              maven 'maven'
+              maven 'maven3.3.9'
         }
         parameters {
            string(name: 'VERSION', defaultValue: '2.24-SNAPSHOT', description: 'Which version to build?')
