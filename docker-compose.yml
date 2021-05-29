@@ -14,4 +14,3 @@ services:
             SITE_ID: 101
         ports:
             - 8082:8080/tcp
-        container_name: pipeline-spring-demo

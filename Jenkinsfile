@@ -27,7 +27,7 @@ pipeline {
                     steps {
                         sh 'docker --version'
                         sh 'docker build -t docker.finnplay.net/springdemo:${VERSION} .'
-                        sh 'docker-compose up'
+                        sh 'docker-compose up -d'
                    }
             }
     }
