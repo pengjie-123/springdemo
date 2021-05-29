@@ -5,7 +5,7 @@ pipeline {
               maven 'maven'
         }
         parameters {
-           string(name: 'VERSION', defaultValue: '2.24-SNAPSHOT', description: 'Which version to build?')
+           string(name: 'VERSION', defaultValue: '2.21-SNAPSHOT', description: 'Which version to build?')
         }
 
     stages {

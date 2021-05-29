@@ -1,7 +1,7 @@
 version: '2'
 services:
     springdemo:
-        image: docker.finnplay.net/springdemo
+        image: docker.finnplay.net/springdemo:2.21-SNAPSHOT
         environment:
             DB_HOST: 127.0.0.1:3306
             DB_NAME: billfold_dev
