@@ -1,0 +1,17 @@
+version: '2'
+services:
+    springdemo:
+        image: docker.finnplay.net/springdemo
+        environment:
+            DB_HOST: 127.0.0.1:3306
+            DB_NAME: billfold_dev
+            DB_USER_NAME: demo
+            DB_PASSWORD: demop@ssword
+            JMS_BROKER_URL: tcp://activemq:61616
+            JMS_ACTIVEMQ_USERNAME: SITE
+            JMS_ACTIVEMQ_PASSWORD: 8CeOvnFa
+            LOG_APPENDER: 'R'
+            SITE_ID: 101
+        ports:
+            - 8082:8080/tcp
+        container_name: pipeline-spring-demo
