@@ -26,8 +26,7 @@ pipeline {
          stage('Build images') {
                     steps {
                         sh 'docker --version'
-                        def app = docker.build('docker.finnplay.net/springdemo:${VERSION}', '--pull .')
-                        app.push()
+                        docker.build('docker.finnplay.net/springdemo:${VERSION}', '--pull .')
                    }
             }
     }
