@@ -27,6 +27,7 @@ pipeline {
                     steps {
                         sh 'docker --version'
                         docker.build('docker.finnplay.net/springdemo:${VERSION}', '--pull .')
+                        sh docker build docker.finnplay.net/springdemo:${VERSION} .
                    }
             }
     }
