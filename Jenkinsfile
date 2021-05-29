@@ -26,7 +26,7 @@ pipeline {
          stage('Build images') {
                     steps {
                         sh 'docker --version'
-                        sh 'docker build docker.finnplay.net/springdemo:${VERSION} .'
+                        sh 'docker build -t docker.finnplay.net/springdemo:${VERSION} .'
                    }
             }
     }
