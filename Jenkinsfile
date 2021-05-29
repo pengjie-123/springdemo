@@ -15,12 +15,18 @@ pipeline {
                 echo 'Hello World'
                 echo 'empty stage'
                 echo 'hello jie'
-                echo "${VERSION}"            }
+                echo "${VERSION}"
+            }
         }
         stage('Build') {
+            steps {
+                sh 'mvn clean install'
+           }
+        }
+         stage('Build images') {
                     steps {
-                        sh 'mvn clean install'
-                    }
-                }
+                        sh 'docker --version'
+                   }
+            }
     }
 }
