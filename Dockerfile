@@ -1,7 +1,5 @@
 FROM tomcat:9
 
-ARG inputDirectory=$CATALINA_HOME/webapps/springdemo
-
 COPY target/springdemo.war $CATALINA_HOME/webapps/springdemo.war
 
 RUN mkdir $CATALINA_HOME/webapps/springdemo/; cd $CATALINA_HOME/webapps/springdemo; unzip ../springdemo.war; rm ../springdemo.war

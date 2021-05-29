@@ -12,23 +12,27 @@ pipeline {
         stage('echo version') {
             steps {
                 sh 'mvn -version'
-                echo 'Hello World'
-                echo 'empty stage'
-                echo 'hello jie'
                 echo "${VERSION}"
             }
         }
-        stage('Build') {
+        stage('Build maven') {
             steps {
                 sh 'mvn clean install'
            }
         }
-         stage('Build images') {
+         stage('Build images and push') {
                     steps {
                         sh 'docker --version'
-                        sh 'docker build -t docker.finnplay.net/springdemo:${VERSION} .'
-                        sh 'docker-compose up -d'
+                        sh 'docker build -t registry.cn-hangzhou.aliyuncs.com/jiepeng/springdemo:${VERSION} .'
+                        sh 'docker login --username=我热爱的星球 --password=abc123ABC registry.cn-hangzhou.aliyuncs.com'
+                        sh 'docker push registry.cn-hangzhou.aliyuncs.com/jiepeng/springdemo:${VERSION}'
                    }
             }
+
+          stage('Deploy container') {
+              steps {
+                  h 'docker-compose up -d'
+              }
+        }
     }
 }
