@@ -32,8 +32,8 @@ pipeline {
          stage('Build images and push') {
                     steps {
                         sh 'docker build -t registry.cn-hangzhou.aliyuncs.com/jiepeng/springdemo:${VERSION} .'
-                        sh 'docker login --username=我热爱的星球 --password=abc123ABC registry.cn-hangzhou.aliyuncs.com'
-                        sh 'docker push registry.cn-hangzhou.aliyuncs.com/jiepeng/springdemo:${VERSION}'
+//                         sh 'docker login --username=我热爱的星球 --password=abc123ABC registry.cn-hangzhou.aliyuncs.com'
+//                         sh 'docker push registry.cn-hangzhou.aliyuncs.com/jiepeng/springdemo:${VERSION}'
                    }
             }
 
