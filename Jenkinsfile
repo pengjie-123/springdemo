@@ -32,14 +32,14 @@ pipeline {
          stage('Build images and push') {
                     steps {
                         sh 'docker build -t registry.cn-hangzhou.aliyuncs.com/jiepeng/springdemo:${VERSION} .'
-//                         sh 'docker login --username=我热爱的星球 --password=abc123ABC registry.cn-hangzhou.aliyuncs.com'
-//                         sh 'docker push registry.cn-hangzhou.aliyuncs.com/jiepeng/springdemo:${VERSION}'
+                        sh 'docker login --username=我热爱的星球 --password=abc123ABC registry.cn-hangzhou.aliyuncs.com'
+                        sh 'docker push registry.cn-hangzhou.aliyuncs.com/jiepeng/springdemo:${VERSION}'
                    }
             }
 
           stage('Deploy container') {
               steps {
-                   sh "rancher-compose --url ${env.ENVIRONMENT_ENDPOINT} --access-key ${env.ACCESS_KEY} --secret-key ${env.SECRET_KEY} -f ${workspace}/${env.DOCKER_COMPOSE_FILE}   -p ${env.STACK_NAME} up ${env.SERVICE_NAME} --force-upgrade -p -c -d"
+                   sh "/usr/local/bin/rancher-compose --url ${env.ENVIRONMENT_ENDPOINT} --access-key ${env.ACCESS_KEY} --secret-key ${env.SECRET_KEY} -f ${workspace}/${env.DOCKER_COMPOSE_FILE}   -p ${env.STACK_NAME} up ${env.SERVICE_NAME} --force-upgrade -p -c -d"
               }
         }
     }
