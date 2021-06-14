@@ -1,6 +1,15 @@
 pipeline {
     agent any
 
+     environment {
+            ENVIRONMENT_ENDPOINT = 'http://192.168.0.100:8081/v1'
+            ACCESS_KEY           = '3D4C98E120BB1FB51C74'
+            SECRET_KEY           = 'p3tmPXKDxNADMdyjish1FEUUSS89B4ZqH1t8DpQ9'
+            STACK_NAME           = 'testapp'
+            SERVICE_NAME         = 'springdemo'
+            DOCKER_COMPOSE_FILE  = 'docker-compose.yml'
+        }
+
     tools {
               maven 'maven'
         }
@@ -30,7 +39,7 @@ pipeline {
 
           stage('Deploy container') {
               steps {
-                  sh 'docker-compose up -d'
+                   sh "rancher-compose --url ${env.ENVIRONMENT_ENDPOINT} --access-key ${env.ACCESS_KEY} --secret-key ${env.SECRET_KEY} -f ${workspace}/${env.DOCKER_COMPOSE_FILE}   -p ${env.STACK_NAME} up ${env.SERVICE_NAME} --force-upgrade -p -c -d"
               }
         }
     }
