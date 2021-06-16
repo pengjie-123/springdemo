@@ -3,9 +3,9 @@ pipeline {
 
      environment {
             ENVIRONMENT_ENDPOINT = 'http://192.168.0.100:8081/v1'
-            ACCESS_KEY           = '3D4C98E120BB1FB51C74'
-            SECRET_KEY           = 'p3tmPXKDxNADMdyjish1FEUUSS89B4ZqH1t8DpQ9'
-            STACK_NAME           = 'dev1'
+            ACCESS_KEY           = 'CFBD134346B07ADD7FFC'
+            SECRET_KEY           = 'N2ko1tDZ7QG4hZqkF31BtYCpFW67cuAGAtyGcAL6'
+            STACK_NAME           = 'app'
             SERVICE_NAME         = 'springdemo'
             DOCKER_COMPOSE_FILE  = 'docker-compose.yml'
         }
