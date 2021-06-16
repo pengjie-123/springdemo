@@ -3,7 +3,7 @@ pipeline {
 
      environment {
             ENVIRONMENT_ENDPOINT = 'http://192.168.0.100:8081/v1/projects/1a7'
-            ACCESS_KEY           = ''
+            ACCESS_KEY           = 'B470F58E3BDF3B8BDC5E'
             SECRET_KEY           = '18qshSuu52cuQdQY5g7cRWvzqQJbCNqqAtzhA3uW'
             STACK_NAME           = 'app'
             SERVICE_NAME         = 'springdemo'
