@@ -2,9 +2,9 @@ pipeline {
     agent any
 
      environment {
-            ENVIRONMENT_ENDPOINT = 'http://192.168.0.100:8081/v1'
-            ACCESS_KEY           = 'CFBD134346B07ADD7FFC'
-            SECRET_KEY           = 'N2ko1tDZ7QG4hZqkF31BtYCpFW67cuAGAtyGcAL6'
+            ENVIRONMENT_ENDPOINT = 'http://192.168.0.100:8081/v1/projects/1a7'
+            ACCESS_KEY           = ''
+            SECRET_KEY           = '18qshSuu52cuQdQY5g7cRWvzqQJbCNqqAtzhA3uW'
             STACK_NAME           = 'app'
             SERVICE_NAME         = 'springdemo'
             DOCKER_COMPOSE_FILE  = 'docker-compose.yml'
