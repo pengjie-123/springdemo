@@ -1,7 +1,7 @@
 package com.mt.controller;
 
 import com.mt.bean.User;
-import com.mt.service.TestService;
+import com.mt.cache.TestService;
 import com.mt.thread.ThreadService;
 import java.util.ArrayList;
 import java.util.HashMap;

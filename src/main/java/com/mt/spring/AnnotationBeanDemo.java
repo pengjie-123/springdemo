@@ -1,6 +1,6 @@
 package com.mt.spring;
 
-import com.mt.service.TestService;
+import com.mt.cache.TestService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class AnnotationBeanDemo {

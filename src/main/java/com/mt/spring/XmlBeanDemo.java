@@ -1,8 +1,6 @@
 package com.mt.spring;
 
-import com.mt.component.TestSpringBean;
-import com.mt.service.TestService;
-import java.util.Map;
+import com.mt.cache.TestService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class XmlBeanDemo {

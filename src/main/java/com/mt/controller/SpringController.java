@@ -2,7 +2,7 @@ package com.mt.controller;
 
 import com.mt.bean.User;
 import com.mt.component.TestSpringBean;
-import com.mt.service.TestService;
+import com.mt.cache.TestService;
 import com.mt.spring.XmlBeanDemo;
 import java.util.Map;
 import javax.servlet.ServletContext;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;

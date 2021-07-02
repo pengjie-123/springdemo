@@ -1,4 +1,4 @@
-package com.mt.service;
+package com.mt.cache;
 
 import com.mt.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;

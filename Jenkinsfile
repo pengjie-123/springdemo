@@ -2,7 +2,7 @@ pipeline {
     agent any
 
      environment {
-            ENVIRONMENT_ENDPOINT = 'http://192.168.0.100:8081/v2-beta/projects/1a7'
+                ENVIRONMENT_ENDPOINT = 'http://192.168.0.100:8081/v2-beta/projects/1a7'
             ACCESS_KEY           = 'B470F58E3BDF3B8BDC5E'
             SECRET_KEY           = '18qshSuu52cuQdQY5g7cRWvzqQJbCNqqAtzhA3uW'
             STACK_NAME           = 'app'

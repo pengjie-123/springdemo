@@ -14,7 +14,7 @@ public class User implements Serializable {
     }
 
     public User(Integer id, String name) {
-        this.id = id;
+        this.id = id.hashCode();
         this.name = name;
     }
 
