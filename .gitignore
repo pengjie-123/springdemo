@@ -1,3 +1,5 @@
 /.idea/
 /target/*
 /out/*
+/springdemo.iml
+/catalina.base*
