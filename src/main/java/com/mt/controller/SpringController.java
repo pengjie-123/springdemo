@@ -2,7 +2,7 @@ package com.mt.controller;
 
 import com.mt.bean.User;
 import com.mt.component.TestSpringBean;
-import com.mt.cache.TestService;
+import com.mt.service.TestCacheService;
 import com.mt.spring.XmlBeanDemo;
 import java.util.Map;
 import javax.servlet.ServletContext;
@@ -22,8 +22,8 @@ public class SpringController {
 
     @Autowired ApplicationContext context;
 
-    @Autowired TestService testService;
-    @Autowired XmlBeanDemo demo;
+    @Autowired TestCacheService testCacheService;
+    @Autowired XmlBeanDemo      demo;
 
     @RequestMapping("bean")
     void getBean() {
@@ -49,9 +49,9 @@ public class SpringController {
 
     @RequestMapping("container")
     void test() {
-        System.out.println(testService);
-        System.out.println(testService.getClass());
-        testService.find(1);
+        System.out.println(testCacheService);
+        System.out.println(testCacheService.getClass());
+        testCacheService.find(1);
     }
 
     // we create a same name bean in parent container and sub container and test if these two containers

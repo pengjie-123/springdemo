@@ -2,9 +2,12 @@ package com.mt.cache;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MyCache {
     private Map cache = new HashMap();
+    private static final Logger log = LoggerFactory.getLogger(MyCache.class);
 
 
     public void putVal(String key, Object value, long ttl) {
@@ -36,7 +39,7 @@ public class MyCache {
         for (int i = 0; i < 10; i++) {
             System.out.println("the cache size is: " + myCache.cache.size());
             System.out.println(myCache.getVal("token"));
-            Thread.sleep(10 * 1000);
+            Thread.sleep(2 * 1000);
         }
     }
 

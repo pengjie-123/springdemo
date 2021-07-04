@@ -121,6 +121,62 @@
       <version>${jackson.version}</version>
     </dependency>
 
+    <!--    hibernate support-->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.3.7.Final</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.javassist</groupId>
+          <artifactId>javassist</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>antlr</groupId>
+          <artifactId>antlr</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>org.hibernate.validator</groupId>-->
+<!--      <artifactId>hibernate-validator</artifactId>-->
+<!--      <version>6.0.14.Final</version>-->
+<!--    </dependency>-->
+
+    <!--  dbcp2  -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-dbcp2</artifactId>
+      <version>2.5.0</version>
+    </dependency>
+
+    <!-- spring orm-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>5.1.5.RELEASE</version>
+    </dependency>
+
+    <!-- mysql -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.47</version>
+    </dependency>
+
+    <!-- logback -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -169,4 +225,12 @@
           </plugin>
       </plugins>
   </build>
+
+  <repositories>
+    <repository>
+      <id>jboss-maven2-release-repo</id>
+      <name>JBoss Maven2 release repo</name>
+      <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+    </repository>
+  </repositories>
 </project>

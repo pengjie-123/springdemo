@@ -1,7 +1,7 @@
 package com.mt.controller;
 
 import com.mt.bean.User;
-import com.mt.cache.TestService;
+import com.mt.service.TestCacheService;
 import com.mt.thread.ThreadService;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,24 +21,22 @@ public class TestController {
     private        Map<String,Object> cache = new HashMap<>();
     private static ExecutorService    pools = Executors.newFixedThreadPool(5);
 
-    @Autowired     TestService        testService;
+    @Autowired TestCacheService   testCacheService;
     @Autowired ApplicationContext context;
 
     @GetMapping("get")
     public String get(Integer id) {
-        //testService.find();
         System.out.println(context.getBean("test"));
-//        User user = testService.find(id);
-        System.out.println(testService);
+        System.out.println(testCacheService);
         return "ok";
     }
 
     //test cache how to work
     @GetMapping("cache")
     public String cache() {
-        cache.put("u1",new User(1,"kaine"));
-        cache.put("u2",new User(2,"tony"));
-        cache.put("u3",new User(3,"tom"));
+        cache.put("u1",new User());
+        cache.put("u2",new User());
+        cache.put("u3",new User());
         return "cache ok";
     }
 
@@ -47,7 +45,7 @@ public class TestController {
     public String getCache() {
         System.out.println(cache);
         User user = (User) cache.get("u1");
-        return user.getName();
+        return "ok";
     }
 
     @GetMapping("shut")

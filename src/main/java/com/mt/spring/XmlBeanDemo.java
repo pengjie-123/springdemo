@@ -1,6 +1,6 @@
 package com.mt.spring;
 
-import com.mt.cache.TestService;
+import com.mt.service.TestCacheService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class XmlBeanDemo {
@@ -11,8 +11,8 @@ public class XmlBeanDemo {
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        Object      bean1 = context.getBean("bean1");
-        TestService c = (TestService) context.getBean("test");
+        Object           bean1 = context.getBean("bean1");
+        TestCacheService c     = (TestCacheService) context.getBean("test");
         System.out.println(c);
         System.out.println(c.getClass());
         System.out.println(c.find(2));

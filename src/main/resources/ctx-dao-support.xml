@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations" value="classpath:jdbc.properties"/>
+    </bean>
+
+    <bean id="datasource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="${db.driverClassName}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="initialSize" value="${db.initialSize}"/>
+        <property name="maxTotal" value="${db.maxTotal}"/>
+        <property name="minIdle" value="${db.minIdle}"/>
+        <property name="maxIdle" value="${db.maxIdle}"/>
+        <property name="testOnBorrow" value="${db.testOnBorrow}"/>
+        <property name="testWhileIdle" value="${db.testWhileIdle}"/>
+        <property name="validationQuery" value="${db.validationQuery}"/>
+        <property name="defaultAutoCommit" value="false"/>
+        <property name="removeAbandonedTimeout" value="${db.removeAbandonedTimeout}"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <qualifier value="billfold"/>
+        <property name="dataSource" ref="datasource"/>
+        <property name="packagesToScan" value="com.mt"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql:#{false}}</prop>
+<!--                <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</prop>-->
+            </props>
+        </property>
+    </bean>
+</beans>

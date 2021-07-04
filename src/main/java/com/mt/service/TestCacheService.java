@@ -1,4 +1,4 @@
-package com.mt.cache;
+package com.mt.service;
 
 import com.mt.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
+public interface TestCacheService {
+
+    public User find(Integer id);
+}
+
 @Service("test")
-public class TestServiceImpl implements TestService {
+class TestCacheServiceImpl implements TestCacheService {
     @Autowired ApplicationContext context;
 
     @Override
@@ -16,7 +21,7 @@ public class TestServiceImpl implements TestService {
         System.out.println("find from db");
         System.out.println(context.getBean("test"));
         System.out.println(context.getBean("test").getClass());
-        return new User(id, "tony"+id);
+        return new User();
     }
 
     public boolean isCache(){

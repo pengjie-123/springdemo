@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="R" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${catalina.base}/logs/demo.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.base}/logs/demo.log.%d.%i.gz</fileNamePattern>
+            <maxFileSize>1GB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="START_UP_LOG" class="ch.qos.logback.core.FileAppender">
+        <File>${catalina.base}/logs/demo-startup.log</File>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <FileNamePattern>${catalina.base}/logs/demo-startup.log.%d.gz</FileNamePattern>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="${DEFAULT_LOG_LEVEL:-INFO}">
+        <appender-ref ref="${LOG_APPENDER:-CONSOLE}"/>
+    </root>
+
+    <logger name="freemarker" level="ERROR"/>
+    <logger name="org" level="ERROR"/>
+    <logger name="io" level="ERROR"/>
+    <!-- Other logs -->
+    <logger name="START_UP_LOG" level="DEBUG">
+        <appender-ref ref="START_UP_LOG"/>
+    </logger>
+
+</configuration>

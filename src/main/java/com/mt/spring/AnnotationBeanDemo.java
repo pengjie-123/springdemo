@@ -1,6 +1,6 @@
 package com.mt.spring;
 
-import com.mt.cache.TestService;
+import com.mt.service.TestCacheService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class AnnotationBeanDemo {
@@ -13,7 +13,7 @@ public class AnnotationBeanDemo {
         Object  bean = context.getBean("test");
         System.out.println(bean);
         System.out.println(bean.getClass());
-        TestService b = (TestService) bean;
+        TestCacheService b = (TestCacheService) bean;
         System.out.println(b.find(1));
     }
 }

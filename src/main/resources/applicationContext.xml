@@ -16,6 +16,8 @@
     http://www.springframework.org/schema/cache
     http://www.springframework.org/schema/cache/spring-cache.xsd">
 
+    <import resource="classpath*:/ctx-transaction-support.xml"/>
+
     <context:annotation-config/>
 
     <cache:annotation-driven cache-manager="cacheManager"/>
@@ -39,6 +41,7 @@
     <aop:aspectj-autoproxy/>
     <context:component-scan base-package="com.mt.service" />
     <context:component-scan base-package="com.mt.component" />
+    <context:component-scan base-package="com.mt.dao" />
 
 
 <!--  we can use name which is same as id to mark this bean as a unique identifier -->
