@@ -3,8 +3,8 @@ services:
     springdemo:
         image: registry.cn-hangzhou.aliyuncs.com/jiepeng/springdemo:2.21-SNAPSHOT
         environment:
-            DB_HOST: 127.0.0.1:3306
-            DB_NAME: billfold_dev
+            DB_HOST: 192.168.0.194:3306
+            DB_NAME: springdemo
             DB_USER_NAME: demo
             DB_PASSWORD: demop@ssword
             JMS_BROKER_URL: tcp://activemq:61616
