@@ -33,7 +33,7 @@
     </root>
 
     <logger name="freemarker" level="ERROR"/>
-    <logger name="org" level="ERROR"/>
+<!--    <logger name="org" level="ERROR"/>-->
     <logger name="io" level="ERROR"/>
     <!-- Other logs -->
     <logger name="START_UP_LOG" level="DEBUG">
