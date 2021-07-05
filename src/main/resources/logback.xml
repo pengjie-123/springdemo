@@ -33,7 +33,9 @@
     </root>
 
     <logger name="freemarker" level="ERROR"/>
-<!--    <logger name="org" level="ERROR"/>-->
+    <logger name="org.springframework" level="${SPRING_LOG_LEVEL:-ERROR}"/>
+    <logger name="org.hibernate" level="${HIBERNATE_LOG_LEVEL:-ERROR}"/>
+    <logger name="com.mt" level="${PACKAGE_LOG_LEVEL:-TRACE}"/>
     <logger name="io" level="ERROR"/>
     <!-- Other logs -->
     <logger name="START_UP_LOG" level="DEBUG">

@@ -11,7 +11,10 @@ services:
             JMS_ACTIVEMQ_USERNAME: SITE
             JMS_ACTIVEMQ_PASSWORD: 8CeOvnFa
             LOG_APPENDER: R
-            DEFAULT_LOG_LEVEL: TRACE
+            DEFAULT_LOG_LEVEL: INFO
+            SPRING_LOG_LEVEL: ERROR
+            HIBERNATE_LOG_LEVEL: ERROR
+            PACKAGE_LOG_LEVEL: TRACE
             SITE_ID: 101
         ports:
             - 8082:8080/tcp
