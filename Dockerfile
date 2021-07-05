@@ -1,4 +1,4 @@
-FROM tomcat:9
+FROM tomcat:8
 
 COPY target/springdemo.war $CATALINA_HOME/webapps/springdemo.war
 
