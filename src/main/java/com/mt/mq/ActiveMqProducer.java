@@ -1,5 +1,6 @@
 package com.mt.mq;
 
+import java.util.HashMap;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
@@ -18,6 +19,10 @@ public class ActiveMqProducer {
         Destination destination = session.createQueue("test_queue");
         MessageProducer producer = session.createProducer(destination);
         TextMessage message = session.createTextMessage("hello, some message!!!");
+//        TextMessage message2 = session.createMapMessage();
+//        message2.setStringProperty("as","");
+        message.setJMSMessageID("asd");
+        message.getJMSMessageID();
         for (int i = 0; i < 10; i++) {
             Thread.sleep(2000);
             producer.send(message);
