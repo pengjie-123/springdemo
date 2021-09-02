@@ -2,6 +2,7 @@ package com.mt.service;
 
 import com.mt.bean.User;
 import com.mt.dao.UserDao;
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,9 @@ public interface UserService {
 
     public void registerComplete();
 
-    public User fetchUser(Long userId);
+    public User fetchUser(Long userId) throws Exception;
+
+    public Collection<User> fetchUserByName(String name);
 }
 
 @Component
@@ -31,9 +34,29 @@ class UserServiceImpl implements UserService {
         context.publishEvent(user);
     }
 
-    @Override public User fetchUser(Long userId) {
-        Assert.notNull(userId, "userId is required");
-        return userDao.getUser(userId);
+    @Override public User fetchUser(Long userId) throws Exception {
+        User user;
+        try {
+            Assert.notNull(userId, "userId is required");
+            user = userDao.getUser(userId);
+            user.setUserName("test123456");
+
+            userDao.updateUser(user);
+            doSomething();
+
+        } catch (Exception e) {
+                e.printStackTrace();
+                throw e;
+        }
+        return user;
+    }
+
+    @Override public Collection<User>  fetchUserByName(String name) {
+        return userDao.getUseBynNamer(name);
+    }
+
+    private void doSomething() throws Exception {
+        throw new Exception();
     }
 }
 

@@ -3,6 +3,7 @@ package com.mt.controller;
 import com.mt.bean.User;
 import com.mt.service.UserService;
 import com.mt.spring.XmlBeanDemo;
+import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -40,6 +41,22 @@ public class UserController {
             log.error("something went wrong, error:{}", e.getMessage(), e);
         } finally {
             log.info("[INPUT_OUTPUT_USER]: [URI]{}, userId: {}, [RESPONSE]{}[TIME]{}ms[END]", request.getRequestURI(), userId, user, System.currentTimeMillis()-x1);
+        }
+        return user;
+    }
+
+    @RequestMapping("findUser/{name}")
+    public Collection<User> findUser(@PathVariable(name = "name", required = true) String name,
+                               HttpServletRequest request, HttpServletResponse r) {
+        long x1 = System.currentTimeMillis();
+        Collection<User>  user = null;
+        try {
+            user = userService.fetchUserByName(name);
+            System.out.println(user == null);
+        } catch (Exception e) {
+            log.error("something went wrong, error:{}", e.getMessage(), e);
+        } finally {
+            log.info("[INPUT_OUTPUT_USER]: [URI]{}, userId: {}, [RESPONSE]{}[TIME]{}ms[END]", request.getRequestURI(), 1, user, System.currentTimeMillis()-x1);
         }
         return user;
     }
