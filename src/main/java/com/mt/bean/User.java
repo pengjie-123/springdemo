@@ -22,6 +22,17 @@ public class User implements Serializable {
     @Column(name = "USER_NAME")
     private String userName;
 
+    @Column(name = "SITE_ID")
+    private Integer siteId;
+
+    public Integer getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(Integer siteId) {
+        this.siteId = siteId;
+    }
+
     @Column(name = "EMAIL")
     private String email;
 

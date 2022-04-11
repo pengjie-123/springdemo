@@ -24,3 +24,5 @@ create two(or more) beans with different property.
 2020/10/19 add oberver dessign pattern demo(implement by annotation and spring common)
 
 2021/02/25 add ActiveMQ test
+
+2022/04/11 add /lock api test, use mysql row lock (select for update)

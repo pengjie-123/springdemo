@@ -15,6 +15,10 @@ public interface UserService {
     public User fetchUser(Long userId) throws Exception;
 
     public Collection<User> fetchUserByName(String name);
+
+    public User getUnique(Integer siteId, String name);
+
+    public User updateUser(Integer siteId, String name);
 }
 
 @Component
@@ -53,6 +57,21 @@ class UserServiceImpl implements UserService {
 
     @Override public Collection<User>  fetchUserByName(String name) {
         return userDao.getUseBynNamer(name);
+    }
+
+    @Override public User getUnique(Integer siteId, String name) {
+        System.out.println(Thread.currentThread().getName() + "-----start a transaction for getUnique");
+        User u =  userDao.getUserForUpdateNoLock(siteId, name);
+        return u;
+    }
+
+    @Override public User updateUser(Integer siteId, String name) {
+        System.out.println(Thread.currentThread().getName() + "-----start a transaction for selecteUpdate");
+
+        User user = userDao.getUserForUpdateNoLock(siteId, name);
+        user.setEmail("00000000.com");
+        return userDao.updateUser(user);
+
     }
 
     private void doSomething() throws Exception {

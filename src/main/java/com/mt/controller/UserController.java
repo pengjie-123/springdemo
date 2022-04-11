@@ -60,4 +60,28 @@ public class UserController {
         }
         return user;
     }
+
+    @RequestMapping("lock")
+    public User lockUser(String name, Integer site, HttpServletRequest request) {
+        long x1 = System.currentTimeMillis();
+        User  user = null;
+        try {
+            user = userService.getUnique(site, name);
+        } catch (Exception e) {
+            log.error("something went wrong, error:{}", e.getMessage(), e);
+        }
+        return user;
+    }
+
+    @RequestMapping("update")
+    public User updateUser(String name, Integer site, HttpServletRequest request) {
+        long x1 = System.currentTimeMillis();
+        User  user = null;
+        try {
+            user = userService.updateUser(site, name);
+        } catch (Exception e) {
+            log.error("something went wrong, error:{}", e.getMessage(), e);
+        }
+        return user;
+    }
 }
