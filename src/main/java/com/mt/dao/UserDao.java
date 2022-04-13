@@ -2,6 +2,7 @@ package com.mt.dao;
 
 import com.mt.bean.User;
 import java.util.Collection;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 public interface UserDao {
     public User getUser(Long userId);
+    public User getCurrentUser(Long userId);
 
     public Collection<User> getUseBynNamer(String name);
 
@@ -28,7 +30,19 @@ class UserDaoImpl implements UserDao {
     @Autowired SessionFactory sessionFactory;
 
     @Override public User getUser(Long userId) {
-        return sessionFactory.getCurrentSession().get(User.class, userId);
+        Session session = sessionFactory.getCurrentSession();
+        session.clear();
+        return session.get(User.class, userId);
+    }
+
+    @Override public User getCurrentUser(Long userId) {
+        String sql = "SELECT * from USER where PK_USER_ID = :userId FOR UPDATE";
+        Session session = sessionFactory.getCurrentSession();
+        session.clear();
+        NativeQuery query = session.createNativeQuery(sql, User.class);
+        query.setParameter("userId", userId);
+
+        return (User) query.uniqueResult();
     }
 
     @Override public Collection<User> getUseBynNamer(String name) {

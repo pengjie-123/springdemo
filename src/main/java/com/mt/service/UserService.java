@@ -19,6 +19,12 @@ public interface UserService {
     public User getUnique(Integer siteId, String name);
 
     public User updateUser(Integer siteId, String name);
+
+    public User updateUser(User user);
+
+    public User getUser(Long userId);
+
+    public User getCurrentUser(Long userId);
 }
 
 @Component
@@ -72,6 +78,36 @@ class UserServiceImpl implements UserService {
         user.setEmail("00000000.com");
         return userDao.updateUser(user);
 
+    }
+
+    @Override public User updateUser(User user) {
+        return userDao.updateUser(user);
+    }
+
+    @Override public User getUser(Long userId) {
+        User before = userDao.getUser(userId);
+        System.out.println(before);
+        try {
+            Thread.sleep(30000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        User after = userDao.getUser(userId);
+        System.out.println(after);
+        return after;
+    }
+
+    @Override public User getCurrentUser(Long userId) {
+        User before = userDao.getUser(userId);
+        System.out.println(before);
+        try {
+            Thread.sleep(30000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        User after = userDao.getCurrentUser(userId);
+        System.out.println(after);
+        return after;
     }
 
     private void doSomething() throws Exception {
