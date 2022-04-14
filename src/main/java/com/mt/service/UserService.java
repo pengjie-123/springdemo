@@ -16,7 +16,7 @@ public interface UserService {
 
     public Collection<User> fetchUserByName(String name);
 
-    public User getUnique(Integer siteId, String name);
+    public User lockUnique(Integer siteId, String name);
 
     public User updateUser(Integer siteId, String name);
 
@@ -65,9 +65,9 @@ class UserServiceImpl implements UserService {
         return userDao.getUseBynNamer(name);
     }
 
-    @Override public User getUnique(Integer siteId, String name) {
+    @Override public User lockUnique(Integer siteId, String name) {
         System.out.println(Thread.currentThread().getName() + "-----start a transaction for getUnique");
-        User u =  userDao.getUserForUpdateNoLock(siteId, name);
+        User u =  userDao.getUserForUpdate(siteId, name);
         return u;
     }
 

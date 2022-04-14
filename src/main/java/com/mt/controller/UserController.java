@@ -76,7 +76,7 @@ public class UserController {
         long x1   = System.currentTimeMillis();
         User user = null;
         try {
-            user = userService.getUnique(site, name);
+            user = userService.lockUnique(site, name);
         } catch (Exception e) {
             log.error("something went wrong, error:{}", e.getMessage(), e);
         }

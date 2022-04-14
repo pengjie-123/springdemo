@@ -2,6 +2,7 @@ package com.mt.dao;
 
 import com.mt.bean.User;
 import java.util.Collection;
+import javax.persistence.LockModeType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
@@ -56,15 +57,16 @@ class UserDaoImpl implements UserDao {
         Integer siteId,
         String name
     ) {
-        String      sql   = "SELECT * from USER where USER_NAME = :userName and SITE_ID = :siteId for update";
-        NativeQuery query = sessionFactory.getCurrentSession().createNativeQuery(sql, User.class);
+        String hql = "from User u where u.siteId = :siteId and u.userName = :userName";
+        Query  query = sessionFactory.getCurrentSession().createQuery(hql);
         query.setParameter("userName", name);
         query.setParameter("siteId", siteId);
+        query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
         User u = (User) query.uniqueResult();
         System.out.println(Thread.currentThread().getName() + "---" + u);
         try {
-            Thread.sleep(60000);
-        }catch (Exception e) {
+            Thread.sleep(10000);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println(Thread.currentThread().getName() + "---" + u);

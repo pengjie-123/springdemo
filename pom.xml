@@ -131,10 +131,10 @@
           <groupId>org.javassist</groupId>
           <artifactId>javassist</artifactId>
         </exclusion>
-        <exclusion>
-          <groupId>antlr</groupId>
-          <artifactId>antlr</artifactId>
-        </exclusion>
+<!--        <exclusion>-->
+<!--          <groupId>antlr</groupId>-->
+<!--          <artifactId>antlr</artifactId>-->
+<!--        </exclusion>-->
       </exclusions>
     </dependency>
 

@@ -28,3 +28,4 @@ create two(or more) beans with different property.
 2022/04/11 add /lock api test, use mysql row lock (select for update)
 
 2022/04/13 add Mysql MVCC test, use RR as default isolation level
+2022/04/14 add fix for hql and use pessimistic_write lock
