@@ -21,6 +21,8 @@ public interface UserDao {
     public User getUserForUpdateNoLock(Integer siteId, String name);
 
     public User updateUser(User user);
+    public void updateUserByFields(User user);
+    public void save(User user);
 
 }
 
@@ -32,7 +34,7 @@ class UserDaoImpl implements UserDao {
 
     @Override public User getUser(Long userId) {
         Session session = sessionFactory.getCurrentSession();
-        session.clear();
+//        session.clear();
         return session.get(User.class, userId);
     }
 
@@ -109,5 +111,19 @@ class UserDaoImpl implements UserDao {
     @Override public User updateUser(User user) {
         sessionFactory.getCurrentSession().update(user);
         return user;
+    }
+
+    @Override public void updateUserByFields(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        NativeQuery query = session.createNativeQuery("UPDATE USER SET USER_NAME=:userName WHERE PK_USER_ID=:userId");
+        query.setParameter("userId", user.getUserId());
+        query.setParameter("userName", user.getUserName());
+        query.executeUpdate();
+
+    }
+
+    @Override public void save(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(user);
     }
 }

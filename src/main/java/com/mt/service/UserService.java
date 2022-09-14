@@ -25,6 +25,7 @@ public interface UserService {
     public User getUser(Long userId);
 
     public User getCurrentUser(Long userId);
+    public User hopeUserFieldsChange(Long userId);
 }
 
 @Component
@@ -108,6 +109,48 @@ class UserServiceImpl implements UserService {
         User after = userDao.getCurrentUser(userId);
         System.out.println(after);
         return after;
+    }
+
+    //Hibernate:
+    //    select
+    //        user0_.PK_USER_ID as PK_USER_1_0_0_,
+    //        user0_.EMAIL as EMAIL2_0_0_,
+    //        user0_.NICK_NAME as NICK_NAM3_0_0_,
+    //        user0_.PHONE_NUMBER as PHONE_NU4_0_0_,
+    //        user0_.SITE_ID as SITE_ID5_0_0_,
+    //        user0_.USER_NAME as USER_NAM6_0_0_
+    //    from
+    //        USER user0_
+    //    where
+    //        user0_.PK_USER_ID=?
+    //Hibernate:
+    //    UPDATE
+    //        USER
+    //    SET
+    //        USER_NAME=?
+    //    WHERE
+    //        PK_USER_ID=?
+    //Hibernate:
+    //    update
+    //        USER
+    //    set
+    //        EMAIL=?,
+    //        NICK_NAME=?,
+    //        PHONE_NUMBER=?,
+    //        SITE_ID=?,
+    //        USER_NAME=?
+    //    where
+    //        PK_USER_ID=?
+
+    //hibernate will trigger extra one more update sql in case if original object's fields was modified and you have a native update sql before
+    //this is a 'bug' of hibernate session, there are 2 solutions
+    //1. dont update any fields of the original object which was fetched from db.
+    //2. add session.clear() in userDao.updateUserByFields(u)
+    @Override public User hopeUserFieldsChange(Long userId) {
+        User u = userDao.getUser(userId);
+        u.setUserName("hibernatetest222");
+        userDao.updateUserByFields(u);
+        return u;
     }
 
     private void doSomething() throws Exception {

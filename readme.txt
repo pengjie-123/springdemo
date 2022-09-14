@@ -29,3 +29,10 @@ create two(or more) beans with different property.
 
 2022/04/13 add Mysql MVCC test, use RR as default isolation level
 2022/04/14 add fix for hql and use pessimistic_write lock
+
+2022/09/14 add test for hibernate session bug
+      //hibernate will trigger extra one more update sql in case if original object's fields was modified and you have a native update sql before
+      //this is a 'bug' of hibernate session, there are 2 solutions
+      //1. dont update any fields of the original object which was fetched from db.
+      //2. add session.clear() in userDao.updateUserByFields(u)
+      .

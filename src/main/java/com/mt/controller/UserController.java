@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,6 +68,7 @@ public class UserController {
         return user;
     }
 
+    @CacheEvict
     @RequestMapping("lock")
     public User lockUser(
         String name,
@@ -133,5 +135,10 @@ public class UserController {
     @RequestMapping("/user/upd")
     public User upd(User user) {
         return userService.updateUser(user);
+    }
+
+    @RequestMapping("/user/autoSave")
+    public User hibernateSession(Long userId) {
+        return userService.hopeUserFieldsChange(userId);
     }
 }
