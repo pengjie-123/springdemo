@@ -1,6 +1,7 @@
 package com.mt.controller;
 
 import com.mt.bean.User;
+import com.mt.bean.UserStatus;
 import com.mt.service.UserService;
 import com.mt.spring.XmlBeanDemo;
 import java.util.Collection;
@@ -140,5 +141,12 @@ public class UserController {
     @RequestMapping("/user/autoSave")
     public User hibernateSession(Long userId) {
         return userService.hopeUserFieldsChange(userId);
+    }
+
+    @RequestMapping("/user/create")
+    public User create() {
+        User u = new User();
+        u.setStatus(UserStatus.active);
+        return userService.create(u);
     }
 }

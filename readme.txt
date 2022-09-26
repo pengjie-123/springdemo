@@ -35,4 +35,6 @@ create two(or more) beans with different property.
       //this is a 'bug' of hibernate session, there are 2 solutions
       //1. dont update any fields of the original object which was fetched from db.
       //2. add session.clear() in userDao.updateUserByFields(u)
+
+2022/09/26  add enum columns test for User.status
       .

@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 public interface UserService {
 
     public void registerComplete();
+    public User create(User user);
 
     public User fetchUser(Long userId) throws Exception;
 
@@ -43,6 +44,11 @@ class UserServiceImpl implements UserService {
         user.setUserId(1L);
         user.setUserName("Tomcat");
         context.publishEvent(user);
+    }
+
+    @Override public User create(User user) {
+        userDao.save(user);
+        return user;
     }
 
     @Override public User fetchUser(Long userId) throws Exception {
