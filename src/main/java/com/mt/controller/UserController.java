@@ -1,9 +1,11 @@
 package com.mt.controller;
 
+import com.mt.bean.Order;
 import com.mt.bean.User;
 import com.mt.bean.UserStatus;
 import com.mt.service.UserService;
 import com.mt.spring.XmlBeanDemo;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -144,9 +146,20 @@ public class UserController {
     }
 
     @RequestMapping("/user/create")
-    public User create() {
+    public User create(Long userId) {
         User u = new User();
+        u.setPersonId(userId);
         u.setStatus(UserStatus.active);
+        Order  o1= new Order();
+        o1.setDetail("j1");
+        o1.setPersonId(userId);
+        Order  o2= new Order();
+        o2.setDetail("j2");
+        o2.setPersonId(userId);
+        Collection<Order> os = new ArrayList();
+        os.add(o1);
+        os.add(o2);
+        u.setOrders(os);
         return userService.create(u);
     }
 }

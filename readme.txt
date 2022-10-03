@@ -37,4 +37,6 @@ create two(or more) beans with different property.
       //2. add session.clear() in userDao.updateUserByFields(u)
 
 2022/09/26  add enum columns test for User.status
+
+2022/10/03  add lazy fetching policy test and toString() should not include the fields need lazy loading
       .

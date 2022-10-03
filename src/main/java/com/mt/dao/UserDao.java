@@ -22,7 +22,7 @@ public interface UserDao {
 
     public User updateUser(User user);
     public void updateUserByFields(User user);
-    public void save(User user);
+    public User save(User user);
 
 }
 
@@ -33,9 +33,12 @@ class UserDaoImpl implements UserDao {
     @Autowired SessionFactory sessionFactory;
 
     @Override public User getUser(Long userId) {
-        Session session = sessionFactory.getCurrentSession();
-//        session.clear();
-        return session.get(User.class, userId);
+
+        Query query = sessionFactory.getCurrentSession().createQuery("from User u where userId = :userId");
+        query.setParameter("userId", userId);
+        User user = (User) query.uniqueResult();
+        System.out.println("===================");
+        return user;
     }
 
     @Override public User getCurrentUser(Long userId) {
@@ -122,8 +125,9 @@ class UserDaoImpl implements UserDao {
 
     }
 
-    @Override public void save(User user) {
+    @Override public User save(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(user);
+        return user;
     }
 }

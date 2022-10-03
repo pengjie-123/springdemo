@@ -1,15 +1,20 @@
 package com.mt.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mt.annotaion.Pick;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,11 +26,40 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    @Column(name = "PERSON_ID")
+    private Long personId;
+
+
+    public Collection<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Collection<Order> orders) {
+        this.orders = orders;
+    }
+
+
     @Column(name = "USER_NAME")
     private String userName;
 
     @Column(name = "SITE_ID")
     private Integer siteId;
+
+    public Long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Long personId) {
+        this.personId = personId;
+    }
 
     public Integer getSiteId() {
         return siteId;
@@ -48,20 +82,18 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
+    @OneToMany(targetEntity = Order.class,
+               mappedBy = "personId",
+                   cascade = CascadeType.ALL)
+    private Collection<Order> orders;
+
+
     public UserStatus getStatus() {
         return status;
     }
 
     public void setStatus(UserStatus status) {
         this.status = status;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getUserName() {
@@ -96,32 +128,25 @@ public class User implements Serializable {
         this.nickName = nickName;
     }
 
+    /**
+     * please not include the fields who was fetched as Lazy policy loading.
+     * otherwise the Lazy fetching will be invalid because the toString() will
+     * be invoked by Hibernaate
+     * @return
+     */
     @Override public String toString() {
         return "User{" +
             "userId=" + userId +
+            ", personId=" + personId +
             ", userName='" + userName + '\'' +
+            ", siteId=" + siteId +
             ", email='" + email + '\'' +
             ", phoneNumber='" + phoneNumber + '\'' +
             ", nickName='" + nickName + '\'' +
+            ", status=" + status +
+            ", orders=" + "not include orders entity in the toString() if lazy fetch" +
             '}';
     }
 
-    @Override public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(userId, user.userId) &&
-            Objects.equals(userName, user.userName) &&
-            Objects.equals(email, user.email) &&
-            Objects.equals(phoneNumber, user.phoneNumber) &&
-            Objects.equals(nickName, user.nickName);
-    }
 
-    @Override public int hashCode() {
-        return Objects.hash(userId, userName, email, phoneNumber, nickName);
-    }
 }

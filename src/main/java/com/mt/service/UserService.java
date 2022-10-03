@@ -1,8 +1,10 @@
 package com.mt.service;
 
+import com.mt.bean.Order;
 import com.mt.bean.User;
 import com.mt.dao.UserDao;
 import java.util.Collection;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -46,9 +48,20 @@ class UserServiceImpl implements UserService {
         context.publishEvent(user);
     }
 
+    /**
+     * User with collections orders. userId in Order entity is null at first userDao.save(),
+     * after that we set it into Order after we get the saved User. then userId will be assigned to
+     * Order after the transaction was committed.
+     *
+     * @param user
+     * @return
+     */
     @Override public User create(User user) {
-        userDao.save(user);
-        return user;
+        User saved = userDao.save(user);
+        for (Order order : saved.getOrders()) {
+            order.setUserId(saved.getUserId());
+        }
+        return saved;
     }
 
     @Override public User fetchUser(Long userId) throws Exception {
@@ -92,14 +105,17 @@ class UserServiceImpl implements UserService {
     }
 
     @Override public User getUser(Long userId) {
-        User before = userDao.getUser(userId);
-        System.out.println(before);
-        try {
-            Thread.sleep(30000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        User before = userDao.getUser(userId);
+//        System.out.println(before);
+//        try {
+//            Thread.sleep(30000);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         User after = userDao.getUser(userId);
+        System.out.println("lazy fetch test");
+        System.out.println(after);
+        Collection orders = after.getOrders();
         System.out.println(after);
         return after;
     }
