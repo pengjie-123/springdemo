@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -158,8 +159,9 @@ public class UserController {
         o2.setPersonId(userId);
         Collection<Order> os = new ArrayList();
         os.add(o1);
-        os.add(o2);
+//        os.add(o2);
         u.setOrders(os);
-        return userService.create(u);
+        User newUser = userService.create(u);
+        return newUser;
     }
 }

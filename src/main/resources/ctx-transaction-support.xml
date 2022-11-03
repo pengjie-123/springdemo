@@ -14,7 +14,10 @@
 
     <aop:config>
         <aop:pointcut id="serviceOperation" expression="execution(* com.mt.service.*.*(..))"/>
-        <aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice"/>
+        <aop:pointcut id="createUser" expression="execution(* com.mt.service.UserService.create(..))"/>
+
+        <aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice" order="1"/>
+        <aop:advisor pointcut-ref="createUser" advice-ref="createUserInterceptor" order="2"/>
     </aop:config>
 
     <bean id="transactionManager"

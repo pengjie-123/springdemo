@@ -39,4 +39,9 @@ create two(or more) beans with different property.
 2022/09/26  add enum columns test for User.status
 
 2022/10/03  add lazy fetching policy test and toString() should not include the fields need lazy loading
+
+2022/11/3   add transaction and interceptor test, test the order of interceptor
+            add 2 solutions for do some logic after transaction was commit
+            solution1: set order
+            solution2: register TransactionSynchronization
       .

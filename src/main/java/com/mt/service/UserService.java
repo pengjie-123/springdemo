@@ -27,6 +27,8 @@ public interface UserService {
 
     public User getUser(Long userId);
 
+    public void doWrong();
+
     public User getCurrentUser(Long userId);
     public User hopeUserFieldsChange(Long userId);
 }
@@ -114,10 +116,13 @@ class UserServiceImpl implements UserService {
 //        }
         User after = userDao.getUser(userId);
         System.out.println("lazy fetch test");
-        System.out.println(after);
         Collection orders = after.getOrders();
-        System.out.println(after);
         return after;
+    }
+
+    @Override public void doWrong() throws RuntimeException {
+        throw new RuntimeException();
+
     }
 
     @Override public User getCurrentUser(Long userId) {
