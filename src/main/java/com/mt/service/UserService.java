@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -66,7 +67,8 @@ class UserServiceImpl implements UserService {
         return saved;
     }
 
-    @Override public User fetchUser(Long userId) throws Exception {
+    @Retryable(include = {Exception.class}, maxAttempts = 3)
+    public User fetchUser(Long userId) throws Exception {
         User user;
         try {
             Assert.notNull(userId, "userId is required");
@@ -77,7 +79,6 @@ class UserServiceImpl implements UserService {
             doSomething();
 
         } catch (Exception e) {
-                e.printStackTrace();
                 throw e;
         }
         return user;
