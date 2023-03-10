@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -39,6 +40,7 @@ class UserServiceImpl implements UserService {
 
     @Autowired ApplicationContext context;
     @Autowired UserDao userDao;
+    int times = 0;
 
     @Override public void registerComplete() {
         System.out.println(Thread.currentThread().getName()+"---register success");
@@ -67,8 +69,14 @@ class UserServiceImpl implements UserService {
         return saved;
     }
 
-    @Retryable(include = {Exception.class}, maxAttempts = 3)
+    @Retryable(include = {Exception.class},
+            maxAttemptsExpression = "${retry.maxAttempts}",
+            backoff = @Backoff(delayExpression = "${retry.delay}",
+                    multiplierExpression = "${retry.multiplier}"))
     public User fetchUser(Long userId) throws Exception {
+        times++;
+        long time = System.currentTimeMillis();
+        System.out.println("--------------this is the " + times + " retry [time] " + time + "ms-------------");
         User user;
         try {
             Assert.notNull(userId, "userId is required");
