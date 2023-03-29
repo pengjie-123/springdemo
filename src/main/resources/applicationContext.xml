@@ -43,6 +43,7 @@
     <context:component-scan base-package="com.mt.component" />
     <context:component-scan base-package="com.mt.dao" />
     <context:component-scan base-package="com.mt.listener" />
+    <context:component-scan base-package="com.mt.retry" />
 
 
 <!--  we can use name which is same as id to mark this bean as a unique identifier -->

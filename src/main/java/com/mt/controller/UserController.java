@@ -123,6 +123,12 @@ public class UserController {
         return userService.getUser(userId);
     }
 
+    // test lazy init by unique index
+    @RequestMapping("/user/getByUniIndex")
+    public User getByName(String name, Integer siteId) {
+        return userService.getUserByName(name, siteId);
+    }
+
     /**
      * different with snapshot read, here we get different result in a same transaction
      * first read use snapshot read
@@ -169,7 +175,12 @@ public class UserController {
         os.add(o1);
 //        os.add(o2);
         u.setOrders(os);
-        User newUser = userService.create(u);
+        User newUser = null;
+        try {
+            newUser = userService.create(u);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return newUser;
     }
 }

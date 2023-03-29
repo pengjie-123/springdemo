@@ -24,6 +24,7 @@ public interface UserDao {
     public void updateUserByFields(User user);
     public User save(User user);
 
+    User getUserByName(String name, Integer siteId);
 }
 
 
@@ -37,7 +38,6 @@ class UserDaoImpl implements UserDao {
         Query query = sessionFactory.getCurrentSession().createQuery("from User u where userId = :userId");
         query.setParameter("userId", userId);
         User user = (User) query.uniqueResult();
-        System.out.println("===================");
         return user;
     }
 
@@ -128,6 +128,15 @@ class UserDaoImpl implements UserDao {
     @Override public User save(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(user);
+        return user;
+    }
+
+    @Override
+    public User getUserByName(String name, Integer siteId) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from User u where u.userName = :name and u.siteId = :siteId");
+        query.setParameter("name", name);
+        query.setParameter("siteId", siteId);
+        User user = (User) query.uniqueResult();
         return user;
     }
 }

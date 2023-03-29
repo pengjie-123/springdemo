@@ -3,8 +3,9 @@ package com.mt.service;
 import com.mt.bean.Order;
 import com.mt.bean.User;
 import com.mt.dao.UserDao;
+
 import java.util.Collection;
-import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.retry.annotation.Backoff;
@@ -15,7 +16,7 @@ import org.springframework.util.Assert;
 public interface UserService {
 
     public void registerComplete();
-    public User create(User user);
+    public User create(User user) throws Exception;
 
     public User fetchUser(Long userId) throws Exception;
 
@@ -28,6 +29,7 @@ public interface UserService {
     public User updateUser(User user);
 
     public User getUser(Long userId);
+    public User getUserByName(String name, Integer siteId);
 
     public void doWrong();
 
@@ -61,7 +63,12 @@ class UserServiceImpl implements UserService {
      * @param user
      * @return
      */
-    @Override public User create(User user) {
+    @Retryable(include = {Exception.class},
+            maxAttemptsExpression = "${retry.maxAttempts}",
+            stateful = false,
+            backoff = @Backoff(delayExpression = "${retry.delay}",
+                    multiplierExpression = "${retry.multiplier}"))
+    @Override public User create(User user) throws Exception {
         User saved = userDao.save(user);
         for (Order order : saved.getOrders()) {
             order.setUserId(saved.getUserId());
@@ -71,6 +78,7 @@ class UserServiceImpl implements UserService {
 
     @Retryable(include = {Exception.class},
             maxAttemptsExpression = "${retry.maxAttempts}",
+            stateful = false,
             backoff = @Backoff(delayExpression = "${retry.delay}",
                     multiplierExpression = "${retry.multiplier}"))
     public User fetchUser(Long userId) throws Exception {
@@ -116,16 +124,30 @@ class UserServiceImpl implements UserService {
     }
 
     @Override public User getUser(Long userId) {
-//        User before = userDao.getUser(userId);
-//        System.out.println(before);
-//        try {
-//            Thread.sleep(30000);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
         User after = userDao.getUser(userId);
-        System.out.println("lazy fetch test");
-        Collection orders = after.getOrders();
+        System.out.println("------lazy fetch test before------------");
+        Collection<Order> orders = after.getOrders();
+        System.out.println(orders);
+        if (orders != null && orders.size() > 0) {
+            System.out.println("orders is not empty");
+        } else {
+            System.out.println("orders is empty");
+        }
+        System.out.println("------lazy fetch test after------------");
+        return after;
+    }
+
+    public User getUserByName(String name, Integer siteId) {
+        User after = userDao.getUserByName(name, siteId);
+        System.out.println("------lazy fetch test before------------");
+        Collection<Order> orders = after.getOrders();
+        System.out.println(orders);
+        if (orders != null && orders.size() > 0) {
+            System.out.println("orders is not empty");
+        } else {
+            System.out.println("orders is empty");
+        }
+        System.out.println("------lazy fetch test after------------");
         return after;
     }
 

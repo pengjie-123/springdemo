@@ -5,17 +5,7 @@ import com.mt.annotaion.Pick;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
@@ -83,7 +73,7 @@ public class User implements Serializable {
     private UserStatus status;
 
     @OneToMany(targetEntity = Order.class,
-               mappedBy = "personId",
+                   mappedBy = "personId",
                    cascade = CascadeType.ALL)
     private Collection<Order> orders;
 
