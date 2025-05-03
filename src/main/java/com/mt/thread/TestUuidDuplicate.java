@@ -1,6 +1,5 @@
 package com.mt.thread;
 
-import com.sun.javafx.binding.SelectBinding.AsDouble;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
